@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/afca/"
+title = "AFCA Guide for Citizens"
+version = "1.0.0"
+id = "artifacts/afca-guide"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = ["/afca/"]
+localPort = 8080
+
+[services.development]
+run = "pnpm --filter @workspace/afca-guide run dev"
+
+[services.production]
+build = ["pnpm", "--filter", "@workspace/afca-guide", "run", "build"]
+publicDir = "artifacts/afca-guide/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "5173"
+BASE_PATH = "/afca/"

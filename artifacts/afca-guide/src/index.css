@@ -1,0 +1,216 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap');
+@import "tailwindcss";
+@import "tw-animate-css";
+@plugin "@tailwindcss/typography";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+  --color-card-border: hsl(var(--card-border));
+
+  --color-popover: hsl(var(--popover));
+  --color-popover-foreground: hsl(var(--popover-foreground));
+  --color-popover-border: hsl(var(--popover-border));
+
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+  --color-primary-border: var(--primary-border);
+
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+  --color-secondary-border: var(--secondary-border);
+
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+  --color-muted-border: var(--muted-border);
+
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+  --color-accent-border: var(--accent-border);
+
+  --color-destructive: hsl(var(--destructive));
+  --color-destructive-foreground: hsl(var(--destructive-foreground));
+  --color-destructive-border: var(--destructive-border);
+
+  --font-sans: var(--app-font-sans);
+  --font-serif: var(--app-font-serif);
+  --font-mono: var(--app-font-mono);
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+:root {
+  /* ── PALETTE: Justice Black & Gold ─────────────────────────────────── */
+  --background:  0 0% 100%;           /* Pure white */
+  --foreground:  218 60% 10%;         /* Deep navy text #0b1a2e */
+  --border:      220 16% 88%;         /* Soft gray borders */
+
+  --card:        0 0% 100%;
+  --card-foreground: 218 60% 10%;
+  --card-border: 220 16% 88%;
+
+  --popover:     0 0% 100%;
+  --popover-foreground: 218 60% 10%;
+  --popover-border: 220 16% 88%;
+
+  --primary:     218 86% 18%;         /* Deep navy #081f3f */
+  --primary-foreground: 0 0% 100%;
+
+  --secondary:   220 20% 96%;         /* Very light blue-gray */
+  --secondary-foreground: 218 86% 18%;
+
+  --muted:       220 14% 95%;
+  --muted-foreground: 220 12% 46%;    /* Readable gray #6b7a8d */
+
+  --accent:      38 96% 54%;          /* Vibrant gold #F5A623 */
+  --accent-foreground: 218 60% 10%;
+
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 0 0% 100%;
+
+  --input:       220 16% 88%;
+  --ring:        218 86% 18%;
+
+  --app-font-sans:  'Inter', system-ui, sans-serif;
+  --app-font-serif: 'Space Grotesk', system-ui, sans-serif;
+  --app-font-mono:  'JetBrains Mono', Menlo, monospace;
+  --radius: 0.75rem;
+
+  --sidebar: 0 0% 100%;
+  --sidebar-foreground: 218 60% 10%;
+  --sidebar-border: 220 16% 88%;
+  --sidebar-primary: 218 86% 18%;
+  --sidebar-primary-foreground: 0 0% 100%;
+  --sidebar-accent: 220 20% 96%;
+  --sidebar-accent-foreground: 218 86% 18%;
+  --sidebar-ring: 218 86% 18%;
+
+  --chart-1: 218 86% 18%;
+  --chart-2: 38 96% 54%;
+  --chart-3: 160 60% 40%;
+  --chart-4: 200 80% 45%;
+  --chart-5: 280 60% 50%;
+
+  --button-outline: rgba(0,0,0,.10);
+  --badge-outline: rgba(0,0,0,.05);
+  --opaque-button-border-intensity: -8;
+  --elevate-1: rgba(0,0,0,.03);
+  --elevate-2: rgba(0,0,0,.08);
+}
+
+@layer base {
+  * { @apply border-border; }
+
+  html {
+    scroll-behavior: smooth;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 16px;
+    line-height: 1.65;
+    letter-spacing: -0.01em;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Space Grotesk', system-ui, sans-serif;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1.15;
+    color: hsl(var(--primary));
+  }
+
+  p, li, span, label {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: hsl(218 40% 20%);
+  }
+
+  /* Ensure muted text is always readable — min contrast */
+  .text-muted-foreground {
+    color: hsl(220 12% 38%) !important;
+  }
+
+  a { transition: color 0.15s ease, opacity 0.15s ease; }
+
+  /* Focus visible */
+  :focus-visible {
+    outline: 2px solid hsl(var(--accent));
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+}
+
+/* ── CUSTOM UTILITIES ──────────────────────────────────────────────────── */
+
+/* Gold gradient text */
+.text-gold-gradient {
+  background: linear-gradient(135deg, #ffffff 0%, #fde68a 40%, #f59e0b 75%, #fb923c 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Navy gradient text */
+.text-navy-gradient {
+  background: linear-gradient(135deg, hsl(218 86% 18%) 0%, hsl(218 86% 30%) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Section divider */
+.section-divider {
+  height: 3px;
+  background: linear-gradient(90deg, transparent 0%, hsl(var(--accent)) 30%, hsl(38 96% 40%) 60%, transparent 100%);
+  border: none;
+}
+
+/* Card hover glow */
+.card-hover {
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+.card-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(8,31,63,0.12);
+  border-color: hsl(38 96% 54% / 0.5);
+}
+
+/* Stat badge */
+.stat-badge {
+  background: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(218 80% 28%) 100%);
+  color: white;
+  border-radius: 9999px;
+  padding: 0.25rem 0.85rem;
+  font-weight: 700;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+/* Testimonial quote mark */
+.quote-mark::before {
+  content: '"';
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 5rem;
+  line-height: 0;
+  color: hsl(38 96% 54% / 0.25);
+  position: absolute;
+  top: 1.5rem;
+  left: 1rem;
+}
